@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anganwadi Registration Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      
+      h1 {
+        text-align: center;
+        color: #008080;
+      }
+      
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333333;
+      }
+      
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        color: #333333;
+      }
+      
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #008080;
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #005454;
+      }
+      
+      .error {
+        color: #ff0000;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1 class="mt-5">Anganwadi Registration Form</h1>
+      <form action="angw_reg" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="Anganwadi_name" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="panchayat">Panchayat:</label>
+          <select id="panchayat_name" name="panchayat_name" class="form-control">
+            <option  value="Elanji">Elanji</option>
+            <option  value="Mulakkulam">Mulakkulam</option>
+            <option  value="Kaduthuruthy">Kaduthuruthy</option>
+            <option  value="Vellor">Vellor</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ward">Ward:</label>
+          <select id="ward_no" name="ward_no" class="form-control">
+            <option  value="1">1</option>
+            <option  value="2">2</option>
+            <option  value="3">3</option>
+            <option  value="4">4</option>
+            <option  value="5">5</option>
+            <option  value="6">6</option>
+            <option  value="7">7</option>
+            <option  value="8">8</option>
+          </select>
+
+
+
+            <label for="teacher">Teacher:</label>
+      <select id="teacher" name="teacher">
+        {% for user in data %}
+        <option  value={{user.teacher_name}}>{{user.teacher_name}}</option>
+        {% endfor %}
+      </select>
+
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dropdown Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+      }
+      
+      form {
+        margin-top: 50px;
+      }
+      
+      label {
+        font-weight: bold;
+      }
+      
+      select {
+        width: 250px;
+        height: 40px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f2f2f2;
+        padding-left: 10px;
+        margin-right: 10px;
+      }
+      
+      input[type="submit"] {
+        height: 40px;
+        border-radius: 5px;
+        border: none;
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      
+      table {
+        width: 100%;
+        margin-top: 50px;
+        border-collapse: collapse;
+      }
+      
+      th {
+        background-color: #28a745;
+        border-color: #dee2e6;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+      }
+      
+      td {
+        border-color: #dee2e6;
+        padding: 10px;
+        text-align: center;
+      }
+      
+      button[type="submit"] {
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="panchayat">Panchayat:</label>
+          <select class="form-control" id="panchayat_name" name="panchayat">
+            <option value="Elanji">Elanji</option>
+            <option value="Mulakkulam">Mulakkulam</option>
+            <option value="Kaduthuruthy">Kaduthuruthy</option>
+            <option value="Vellor">Vellor</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <input type="submit" class="btn btn-success" value="View Anganwadi">
+        </div>
+      </form>
+      
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Anganwadi Name</th>
+            <th>Notification</th>
+          </tr>     
+        </thead>
+        <tbody>
+          {% for obj in ang_obj %}
+            <tr>
+              <td>{{ obj.Anganwadi_name }}</td> 
+              <td>
+            <form action="stock_verificationone" method="post">
+                {% csrf_token %}
+                <input type="hidden" name='Anganwadi_id' value="{{obj.id}}">
+                <button type="submit" class="btn btn-primary">View Data</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+

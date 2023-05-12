@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="main">
+
+        <h1></h1>
+        <div class="container">
+            <div class="sign-up-content">
+                <form method="POST" class="signup-form">
+
+
+
+
+                    <div class="form-textbox">
+
+                        <a href="{% url 'admin_distribution' %}">
+                            <div class="form-textbox">
+                                <input type="button" name="submit" id="submit" class="submit"
+                                    value="stock Distribution" />
+                            </div>
+                        </a>
+                    </div>
+
+
+
+
+
+
+                    <br>
+                    <div class="form-textbox">
+
+                        <a href="{% url 'angw_reg' %}">
+                            <div class="form-textbox">
+                                <input type="button" name="submit" id="submit" class="submit"
+                                    value="Anganwadi Registration" />
+                            </div>
+                        </a>
+                    </div>
+                    <br>
+                    <a href="{% url 'teacher_reg' %}">
+                        <div class="form-textbox">
+                            <input type="button" name="submit" id="submit" class="submit"
+                                value="Teacher registration" />
+                        </div>
+                    </a>
+                    <br>
+                    <a href="{% url 'admin_pro_updation' %}">
+                    <div class="form-textbox">
+                        <input type="button" name="submit" id="submit" class="submit" value=" Stock updation " />
+                    </div>
+                    </a>
+                    <br>
+                    <a href="{% url 'stock_verification' %}">
+                    <div class="form-textbox">
+                        <input type="button" name="submit" id="submit" class="submit" value="stock Validation" />
+                    </div>
+                    </a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

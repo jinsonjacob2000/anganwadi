@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Allocation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: navy;
+      text-align: center;
+    }
+
+    form {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid lightgray;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px lightgray;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    select,
+    input[type="text"] {
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      width: 250px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: navy;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: darkblue;
+    }
+  </style>
+  <script>
+
+    const itemsqty = async (value) => {
+      let url = "http://127.0.0.1:8000/getprd/"
+      let urls = url.concat(value)
+      const response = await fetch(urls);
+      const myJson = await response.json();
+      var dt = document.getElementById("in_hand");
+      dt.value = myJson['quty'];
+      var dats = document.getElementById("anganwadi")
+      var values = dats.value
+      let url1 = " http://127.0.0.1:8000/getInstock/" + values + "/" + value
+
+      const response1 = await fetch(url1);
+      const myJsons = await response1.json();
+      var dts = document.getElementById("in_stock");
+
+      dts.value = myJsons['quty'];
+
+    }
+    const userAction = async (place) => {
+      document.clear();
+      let url = "http://127.0.0.1:8000/getproduct/"
+      let urls = url.concat(place)
+      const response = await fetch(urls);
+      const myJson = await response.json();
+
+      var select = document.getElementById("productss");
+      while (select.hasChildNodes()) {
+        select.firstChild.remove();
+        var dts = document.getElementById("in_stock");
+        dts.value = '';
+        var dt = document.getElementById("in_hand");
+        dt.value = '';
+      }
+      var options = myJson['items'];
+      console.log(options)
+      for (var i = 0; i < options.length; i++) {
+        var opt = options[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Allocation For</h1>
+  <form>
+    <select name="anganwadi" id="anganwadi" onclick="userAction(value);">
+      {% for user in names %}
+      <option value={{user.Anganwadi_name}}>{{user.Anganwadi_name}}</option>
+      {% endfor %}
+    </select>
+    <br><br>
+    <label for="product">Product:</label>
+    <select id="productss" name="product" onclick="itemsqty(this.value);">
+
+    </select>
+    <br><br>
+    <label for="in_hand">In Hand:</label>
+    <input type="text" id="in_hand" name="in_hand">
+    <br><br>
+    <label for="in_stock">In Stock:</label>
+    <input type="text" id="in_stock" name="in_stock">
+    <br><br>
+    <label for="allocate">Allocate:</label>
+    <input type="text" id="allocate" name="allocate">
+    <br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form with Dropdown and Text Box</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+      form {
+        background-color: #fff;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      select, input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      select {
+        appearance: none;
+        background: url('https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png') no-repeat right;
+        background-size: 20px;
+        background-position: 97%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="updation_of_product" method="post">
+        {% csrf_token %}
+
+        
+      <label for="dropdown">STOCK NAME:</label>
+      <select id="dropdown " name="dropdown">
+        {% for user in data %}
+        <option  value={{user.produck_name}}>{{user.produck_name}}</option>
+        {% endfor %}
+      </select><br><br>
+      <label for="text">Quantity:</label>
+      <input type="text" id="text" name="quty" required><br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

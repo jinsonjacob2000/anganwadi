@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notifications</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+        color: #006699;
+      }
+
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+
+      th {
+        background-color: #006699;
+        color: white;
+        text-align: left;
+        padding: 8px;
+      }
+
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      a {
+        text-decoration: none;
+        color: #006699;
+      }
+
+      a:hover {
+        color: #003366;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Notifications</h1>
+    <table>
+      <tr>
+        <th>Serial No.</th>
+        <th>Notification</th>
+        <th>Updated Date</th>
+      </tr>
+      {% for i in ntf %}
+      <tr>
+        <td>{{  i.id }}</td>
+        <td>{{ i.notification }}</td>
+        <td>{{ i.updated_date }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

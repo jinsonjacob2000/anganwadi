@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Notifications</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+			background-color: #f7f7f7;
+		}
+		h1 {
+			font-size: 28px;
+			margin-bottom: 20px;
+			color: #333;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.notification {
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			padding: 10px;
+			margin-bottom: 20px;
+		}
+		.notification .title {
+			font-size: 20px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			color: #333;
+		}
+		.notification .description {
+			font-size: 16px;
+			line-height: 1.5;
+			color: #555;
+		}
+		input[type="text"] {
+			padding: 15px;
+			font-size: 18px;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			margin-bottom: 30px;
+			width: 100%;
+			box-sizing: border-box;
+			background-color: #fff;
+			color: #333;
+			transition: all 0.2s ease-in-out;
+		}
+		input[type="text"]:hover,
+		input[type="text"]:focus {
+			border-color: #bbb;
+			box-shadow: 0 0 5px rgba(0,0,0,0.1);
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>Notifications</h1>
+	<div style="max-width: 500px; margin: 0 auto;">
+		<form action ="notification_update" method="POST">
+			{% csrf_token %}
+			<input type="text" placeholder="Enter your message here" id="notifications" name="notifications">
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+</body>
+</html>

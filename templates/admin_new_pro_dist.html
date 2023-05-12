@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Allocation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: navy;
+      text-align: center;
+    }
+
+    form {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid lightgray;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px lightgray;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    select,
+    input[type="text"] {
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      width: 250px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: navy;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: darkblue;
+    }
+  </style>
+  <script>
+    const userAction = async (stock) => {
+      var dts = document.getElementById("in_stock");
+      var dt = document.getElementById("in_hand");
+      dts.value=0
+      dt.value=0
+      let url = "http://127.0.0.1:8000/getprd/"
+      let urls = url.concat(stock)
+      const response = await fetch(urls);
+      const myJson = await response.json();
+      
+      dt.value = myJson['quty'];
+      var dats = document.getElementById("anganwadi")
+      var values = dats.value
+      let url1 = " http://127.0.0.1:8000/getInstock/" + values + "/" + stock
+
+      const response1 = await fetch(url1);
+      const myJsons = await response1.json();
+
+
+      dts.value = myJsons['quty'];
+
+    }
+
+
+
+
+  </script>
+</head>
+
+<body>
+  <h1>Allocation Form</h1>
+  <form method="post" action="{% url 'admin_new_pro_dist' %}">
+    {% csrf_token %}
+    <select name="anganwadi" id="anganwadi" onclick="userAction(this.value);">
+      {% for user in names %}
+      <option value={{user.Anganwadi_name}}>{{user.Anganwadi_name}}</option>
+      {% endfor %}
+    </select>
+
+    <br><br>
+    <label for="product">Product:</label>
+    <select id="product" name="product" onclick="userAction(this.value);">
+      {% for stock in stocks %}
+      <option value={{stock.produck_name}}>{{stock.produck_name}}</option>
+      {% endfor %}
+
+    </select>
+    <br><br>
+    <label for="in_hand">In Hand:</label>
+    <input type="text" id="in_hand" name="in_hand" readonly>
+    <br><br>
+    <label for="in_stock">In Stock:</label>
+    <input type="text" id="in_stock" name="in_stock" readonly>
+    <br><br>
+    <label for="allocate">Allocate:</label>
+    <input type="text" id="allocate" name="allocate">
+    <br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+
+</html>
